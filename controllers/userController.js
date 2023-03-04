@@ -11,10 +11,8 @@ const signupUser = async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, saltRounds);
   const user = await User.create({email, password: hashedPassword});
   const token = jwt.sign({user}, process.env.SECRET, {expiresIn: "1d"});
-  console.log(token);
-  console.log(user);
 
-  res.status(200).json({email,token});
+  res.status(200).json({email, token});
 };
 const loginUser = async (req, res) => {
   const {email, password} = req.body;
