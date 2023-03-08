@@ -28,7 +28,8 @@ app.get("/", (req, res) => {
 });
 app.use(express.json());
 app.use(cors());
-app.use("/projects", middleware, router);
-app.use("/board", middleware, boardRouter);
+// app.use("/projects", middleware, router);
+app.use("/projects", router);
+app.use("/boards", middleware, boardRouter);
 app.use("/auth", userRouter);
 app.use(bodyParser.json());

@@ -37,7 +37,7 @@ const deleteBoard = async (req, res) => {
   if (!board) {
     return res.status(404).json({error: "No boards found"});
   }
-  res.status(200).json(project);
+  res.status(200).json(board);
 };
 const deleteAllBoards = async (req, res) => {
   const board = await Board.deleteMany();
@@ -53,7 +53,7 @@ const updateBoard = async (req, res) => {
     return res.status(404).json({error: "No board found"});
   }
   const board = await Board.findOneAndUpdate({_id: id}, {...req.body});
-  if (!project) {
+  if (!board) {
     return res.status(404).json({error: "No board found"});
   }
   res.status(200).json(board);
