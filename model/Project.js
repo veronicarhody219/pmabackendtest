@@ -6,7 +6,7 @@ let projectSchema = new Schema(
     pname: {type: String, required: true},
     desc: {type: String, required: true},
     tasks: {type: Array},
-    board: {
+    board_id: {
       type: mongoose.Types.ObjectId,
       ref: "Board",
     },

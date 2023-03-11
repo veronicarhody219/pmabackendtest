@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 
+
 async function verifyToken(req, res, next) {
   if (!req.headers.authorization) {
     return res.status(401).json("Unauthorized request");
@@ -9,13 +10,14 @@ async function verifyToken(req, res, next) {
     return res.status(401).json("Unauthorized request");
   }
   try {
+  
     const payload = jwt.verify(token, process.env.SECRET);
     
-    console.log(payload);
+    req.user = {user_id: payload.user._id, email: payload.user.email};
     next();
   } catch (error) {
     console.log(error);
+    return res.status(401).json("Unauthorized request");
   }
-  
 }
 module.exports = verifyToken;

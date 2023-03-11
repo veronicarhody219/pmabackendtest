@@ -2,6 +2,7 @@ const Project = require("../model/Project");
 const mongoose = require("mongoose");
 
 const getProjects = async (req, res) => {
+  console.log(req);
   const projects = await Project.find({}).sort({createdAt: -1});
   res.status(200).json(projects);
 };
@@ -19,9 +20,11 @@ const getProject = async (req, res) => {
 };
 
 const createProject = async (req, res) => {
+  console.log(req.body);
   const {group, pname, desc, tasks} = req.body;
   try {
     const project = await Project.create({group, pname, desc, tasks});
+
     res.status(200).json(project);
   } catch (error) {
     console.log(error);

@@ -2,7 +2,8 @@ const Board = require("../model/Board");
 const mongoose = require("mongoose");
 
 const getBoards = async (req, res) => {
-  const boards = await Board.find({}).sort({createdAt: -1});
+  const user_id = req.user.user_id;
+  const boards = await Board.find({user_id}).sort({createdAt: -1});
   res.status(200).json(boards);
 };
 const getBoard = async (req, res) => {
@@ -21,7 +22,9 @@ const getBoard = async (req, res) => {
 const createBoard = async (req, res) => {
   const {title} = req.body;
   try {
-    const board = await Board.create({title});
+    const user_id = req.user.user_id;
+
+    const board = await Board.create({title, user_id});
     res.status(200).json(board);
   } catch (error) {
     console.log(error);
